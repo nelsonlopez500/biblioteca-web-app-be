@@ -23,4 +23,8 @@ def create_app():
     from .controllers.ejemplos.ejemplos import ejemplos_bp
     app.register_blueprint(ejemplos_bp, url_prefix='/api')
 
+    # Registrar el blueprint de categorías
+    from .controllers.categorias.categoriasController import categorias_bp
+    app.register_blueprint(categorias_bp, url_prefix='/api')
+
     return app
