@@ -1,4 +1,4 @@
-from repositories.categorias import categoriasRepository
+from app.repositories.categorias import categoriasRepository
 
 class CategoriasService:
     def create_categoria(self, data):
@@ -38,6 +38,5 @@ class CategoriasService:
         categoriasRepository.repo_delete_categoria(categoria)
         return {'message': 'Categoría eliminada exitosamente'}, 200
 
-
 # Instancia del servicio
-categorias_service = CategoriasService()
+categorias_service = CategoriasService()    

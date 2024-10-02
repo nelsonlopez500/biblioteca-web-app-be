@@ -20,11 +20,11 @@ def create_app():
         return redirect('/apidocs')
 
     # Registrar el blueprint de ejemplos
-    from .controllers.ejemplos.ejemplos import ejemplos_bp
+    from app.controllers.ejemplos.ejemplos import ejemplos_bp
     app.register_blueprint(ejemplos_bp, url_prefix='/api')
 
     # Registrar el blueprint de categorías
-    from .controllers.categorias.categoriasController import categorias_bp
+    from app.controllers.categorias.categoriasController import categorias_bp
     app.register_blueprint(categorias_bp, url_prefix='/api')
 
     return app
