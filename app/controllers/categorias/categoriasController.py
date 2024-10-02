@@ -17,16 +17,16 @@ def create_categoria_route():
         schema:
           id: Categoria
           required:
-            - nombre
+            - nombre_categoria
           properties:
-            nombre:
+            nombre_categoria:
               type: string
               example: "Nueva Categoria"
     responses:
       201:
         description: Categoría creada exitosamente
         examples:
-          application/json: {"id": 1, "nombre": "Nueva Categoria"}
+          application/json: {"categoria_id": 1, "nombre_categoria": "Nueva Categoria"}
     """
     data = request.get_json()
     response, status = categorias_service.create_categoria(data)
@@ -44,8 +44,8 @@ def get_categorias_route():
         description: Lista de todas las categorías
         examples:
           application/json: [
-            {"id": 1, "nombre": "Categoria 1"},
-            {"id": 2, "nombre": "Categoria 2"}
+            {"categoria_id": 1, "nombre_categoria": "Categoria 1"},
+            {"categoria_id": 2, "nombre_categoria": "Categoria 2"}
           ]
     """
     response, status = categorias_service.get_categorias()
@@ -68,7 +68,7 @@ def get_categoria_route(id):
       200:
         description: Categoría obtenida exitosamente
         examples:
-          application/json: {"id": 1, "nombre": "Categoria 1"}
+          application/json: {"categoria_id": 1, "nombre_categoria": "Categoria 1"}
       404:
         description: Categoría no encontrada
         examples:
@@ -96,16 +96,16 @@ def update_categoria_route(id):
         schema:
           id: Categoria
           required:
-            - nombre
+            - nombre_categoria
           properties:
-            nombre:
+            nombre_categoria:
               type: string
               example: "Categoria Actualizada"
     responses:
       200:
         description: Categoría actualizada exitosamente
         examples:
-          application/json: {"id": 1, "nombre": "Categoria Actualizada"}
+          application/json: {"categoria_id": 1, "nombre_categoria": "Categoria Actualizada"}
       404:
         description: Categoría no encontrada
         examples:

@@ -1,15 +1,15 @@
 from flask import Flask, redirect
 from flasgger import Swagger
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from sqlobject import sqlhub, connectionForURI
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
 
-    # Inicializar SQLAlchemy
-    db.init_app(app)
+    # Establecer la conexión a la base de datos
+    connection_string = app.config['DATABASE_URI']
+    conn = connectionForURI(connection_string)
+    sqlhub.processConnection = conn
 
     # Inicializar Swagger
     swagger = Swagger(app)

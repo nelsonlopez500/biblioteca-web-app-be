@@ -39,4 +39,4 @@ class CategoriasService:
         return {'message': 'Categoría eliminada exitosamente'}, 200
 
 # Instancia del servicio
-categorias_service = CategoriasService()    
+categorias_service = CategoriasService()

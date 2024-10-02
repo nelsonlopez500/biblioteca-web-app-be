@@ -1,14 +1,15 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
-from sqlalchemy.ext.declarative import declarative_base
+from sqlobject import SQLObject, StringCol, BoolCol, DateTimeCol, IntCol
 
-# Crear una base declarativa
-Base = declarative_base()
+class Categoria(SQLObject):
+    # Define la tabla correspondiente
+    class sqlmeta:
+        table = 'categorias'
 
-# Definir la clase Categoria
-class Categoria(Base):
-    __tablename__ = 'categorias'
-    
-    categoria_id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre_categoria = Column(String(100), unique=True, nullable=False)
-    status = Column(Boolean, default=True)
-    created_at = Column(DateTime)
+    # Define los campos del modelo
+    categoria_id = IntCol(alternateID=True)  # `alternateID=True` para establecer como clave primaria
+    nombre_categoria = StringCol(unique=True, length=100)  # Campo de nombre, único
+    status = BoolCol(default=True)  # Campo de estado
+    created_at = DateTimeCol()  # Campo de fecha y hora de creación
+
+    def __repr__(self):
+        return f'<Categoria {self.nombre_categoria}>'
