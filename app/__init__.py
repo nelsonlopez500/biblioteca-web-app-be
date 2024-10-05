@@ -1,15 +1,16 @@
 from flask import Flask, redirect
 from flasgger import Swagger
-from sqlobject import sqlhub, connectionForURI
+from flask_sqlalchemy import SQLAlchemy
+from config import Config
+
+db = SQLAlchemy()  # Crear una única instancia de SQLAlchemy
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config.Config')
+    app.config.from_object(Config)
 
-    # Establecer la conexión a la base de datos
-    connection_string = app.config['DATABASE_URI']
-    conn = connectionForURI(connection_string)
-    sqlhub.processConnection = conn
+    # Inicializar SQLAlchemy con la aplicación
+    db.init_app(app)
 
     # Inicializar Swagger
     swagger = Swagger(app)
@@ -19,12 +20,12 @@ def create_app():
     def index():
         return redirect('/apidocs')
 
-    # Registrar el blueprint de ejemplos
-    from app.controllers.ejemplos.ejemplos import ejemplos_bp
-    app.register_blueprint(ejemplos_bp, url_prefix='/api')
-
-    # Registrar el blueprint de categorías
+    # Registrar los blueprints
     from app.controllers.categorias.categoriasController import categorias_bp
     app.register_blueprint(categorias_bp, url_prefix='/api')
+
+    # Crear las tablas en la base de datos
+    with app.app_context():
+        db.create_all()
 
     return app
