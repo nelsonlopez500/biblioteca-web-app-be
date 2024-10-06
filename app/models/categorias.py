@@ -1,4 +1,3 @@
-# app/models/categorias.py
 from app import db
 from datetime import datetime
 
