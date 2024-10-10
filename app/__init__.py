@@ -30,6 +30,9 @@ def create_app():
     from app.controllers.editoriales.editorialesController import editoriales_bp
     app.register_blueprint(editoriales_bp, url_prefix='/api')
 
+    from app.controllers.libros.librosController import libros_bp
+    app.register_blueprint(libros_bp, url_prefix='/api')
+
     # Crear las tablas en la base de datos
     with app.app_context():
         db.create_all()
