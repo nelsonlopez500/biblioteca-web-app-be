@@ -36,6 +36,9 @@ def create_app():
     from app.controllers.prestamos.prestamosController import prestamos_bp
     app.register_blueprint(prestamos_bp, url_prefix='/api')
 
+    from app.controllers.prestamos.prestamosHistorialController import prestamos_historial_bp
+    app.register_blueprint(prestamos_historial_bp, url_prefix='/api')
+
     # Crear las tablas en la base de datos
     with app.app_context():
         db.create_all()
