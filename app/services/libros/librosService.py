@@ -7,20 +7,20 @@ class LibrosService:
         return {"message": "Libro creado exitosamente"}, 201
 
     def get_libros(self):
-        libros = librosRepository.repo_get_libros()
+        libros_editoriales = librosRepository.repo_get_libros()
         result = [
             {
-                "libro_id": libro.libro_id,
-                "titulo": libro.titulo,
-                "isbn": libro.isbn,
-                "fecha_publicacion": libro.fecha_publicacion,
-                "editorial_id": libro.editorial_id,
-                "categoria_id": libro.categoria_id,
-                "biblioteca_id": libro.biblioteca_id,
-                "status": libro.status,
-                "created_at": libro.created_at,
+                "libro_id": libro[0].libro_id,
+                "titulo": libro[0].titulo,
+                "isbn": libro[0].isbn,
+                "fecha_publicacion": libro[0].fecha_publicacion,
+                "editorial_id": libro[1].nombre_editorial,  # Cambiado de editorial_id
+                "categoria_id": libro[2].nombre_categoria,  # Cambiado de categoria_id
+                "biblioteca_id": libro[0].biblioteca_id,
+                "status": libro[0].status,
+                "created_at": libro[0].created_at,
             }
-            for libro in libros
+            for libro in libros_editoriales
         ]
         return result, 200
 

@@ -1,6 +1,7 @@
 from flask import Flask, redirect
 from flasgger import Swagger
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS  # Importar CORS
 from config import Config
 
 db = SQLAlchemy()  # Crear una única instancia de SQLAlchemy
@@ -11,6 +12,9 @@ def create_app():
 
     # Inicializar SQLAlchemy con la aplicación
     db.init_app(app)
+
+    # Inicializar CORS
+    CORS(app)  # Habilitar CORS para todas las rutas
 
     # Inicializar Swagger
     swagger = Swagger(app)

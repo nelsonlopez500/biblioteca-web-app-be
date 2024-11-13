@@ -1,3 +1,5 @@
+from app.models.categorias import Categoria
+from app.models.editoriales import Editorial
 from app.models.libros import Libro
 from app import db
 
@@ -18,7 +20,11 @@ def repo_create_libro(data):
 
 
 def repo_get_libros():
-    return Libro.query.filter_by(status=True).all()
+    return db.session.query(Libro, Editorial, Categoria)\
+        .join(Editorial, Libro.editorial_id == Editorial.id)\
+        .join(Categoria, Libro.categoria_id == Categoria.id)\
+        .filter(Libro.status == True)\
+        .all()
 
 
 def repo_get_libro(id):
