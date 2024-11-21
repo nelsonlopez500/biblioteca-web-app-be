@@ -6,17 +6,23 @@ class UsuariosService:
         return {'message': 'Usuario creado exitosamente'}, 201
 
     def get_usuarios(self):
+        ROLES = {
+            1: "Administrador",
+            2: "Bibliotecario",
+            3: "Usuario"
+        }
+        
         usuarios = usuariosRepository.repo_get_usuarios()
         result = [
             {
-                'usuario_id': usuario.id,  # Cambiado de usuario.usuario_id a usuario.id
+                'usuario_id': usuario.id,
                 'nombre': usuario.nombre,
                 'apellido': usuario.apellido,
                 'direccion': usuario.direccion,
                 'telefono': usuario.telefono,
                 'email': usuario.email,
                 'fecha_registro': usuario.fecha_registro,
-                'rol_id': usuario.rol_id,
+                'rol_id': ROLES.get(usuario.rol_id, "Rol no definido"),  # Mapeo del rol_id al nombre
                 'biblioteca_id': usuario.biblioteca_id,
                 'status': usuario.status,
                 'created_at': usuario.created_at
